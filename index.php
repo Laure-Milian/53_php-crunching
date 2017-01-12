@@ -19,28 +19,31 @@ for ($i = 0 ; $i < $words_num ; $i++) {
 		$words_15car[$i] = $matches;	
 	}
 }
-echo "<div>Parmi ceux-ci, " . count($words_15car) . " mots font exactement 15 caractères.</div>";
+echo "<div>Dans ce dictionnaire, " . count($words_15car) . " mots font exactement 15 caractères.</div>";
 
 
 // Combien de mots contiennent la lettre « w » ?
-
 foreach ($dico as $word) {
 
-	$pos = strpos($word, "w");
-	
+	$pos = strpos($word, "w");	
 	if (!$pos === false) {
 		$num_words_w++;
 	}
 
 }
 
-echo "<div>Parmi ceux-ci, " . $num_words_w . " mots contiennent un 'w'.</div>";
+echo "<div>Dans ce dictionnaire, " . $num_words_w . " mots contiennent un 'w'.</div>";
 
 
 // Combien de mots finissent par la lettre « q » ?
-/*	//var_dump($words_w);
-	$len = count($words_w);
-	
-	for ($i = 0 ; $i < $len ; $i++) {
-		var_dump($words_w[$i]);
+foreach ($dico as $word) {
+
+	$last_letter = substr($word, -1);
+
+	if ($last_letter === "q") {
+		$num_words_q++;
 	}
+
+}
+
+echo "<div>Dans ce dictionnaire, " . $num_words_q . " finissent par la lettre 'q'.</div>";
