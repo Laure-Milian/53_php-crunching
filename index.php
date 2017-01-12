@@ -2,7 +2,7 @@
 
 $string = file_get_contents("dictionnaire.txt", FILE_USE_INCLUDE_PATH);
 $dico = explode("\n", $string);
-
+var_dump($dico);
 
 // Combien de mots contient ce dictionnaire ?
 $words_num = count($dico);
@@ -24,4 +24,7 @@ echo "<div>Parmi ceux-ci, " . count($words_15car) . " mots font exactement 15 ca
 
 
 // Combien de mots contiennent la lettre « w » ?
+
+
+
 // Combien de mots finissent par la lettre « q » ?
