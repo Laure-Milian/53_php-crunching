@@ -31,7 +31,7 @@ $top = $brut["feed"]["entry"];
 	echo "<div> Nombre de films sortis avant 2000 : " . $movies_bef2000 . "</div>";
 
 
-	//Quel est le film le plus récent ? Le plus vieux ?
+	// Quel est le film le plus récent ? Le plus vieux ?
 	foreach ($top as $key => $movie) {
 		$label = $movie["title"]["label"];
 		$labels = explode(" - ", $label);
@@ -41,11 +41,27 @@ $top = $brut["feed"]["entry"];
 	}
 
 	ksort($dates_arr);
-	var_dump($dates_arr);
 	$oldest_movie = reset($dates_arr);
 	$newest_movie = end($dates_arr);
 	echo "<div> Film le plus vieux : " . $oldest_movie . "</div>";
 	echo "<div> Film le plus récent : " . $newest_movie . "</div>";
+
+
+	// Quelle est la catégorie de films la plus représentée ?
+	$category_arr = [];
+	
+	foreach ($top as $key => $movie) {
+		$category = $movie["category"]["attributes"]["term"];
+		array_push($category_arr, $category);
+	}
+	$count_catego = array_count_values($category_arr);
+
+	$len = count($count_catego);
+	foreach ($count_catego as $key => $value) {
+		if ($value === max($count_catego)) {
+			echo "<div> Catégorie la plus représentée : " . $key . "</div>";
+		}
+	}	
 ?>
 
 
