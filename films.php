@@ -6,13 +6,24 @@ $top = $brut["feed"]["entry"];
 
 ?>
 
+<?php
+	//Quel est le classement du film « Gravity » ?
+	foreach ($top as $key => $movie) {
+		$label = $movie["im:name"]["label"];
+		$position = $key + 1;
+		if ($label === "Gravity") {
+			echo "Classement de Gravity : " . $position;
+		};
+	}
+?>
+
 <ul>
 	<?php
 		//Afficher top100 selon la forme demandée
-		foreach ($top as $key => $movie) {
-			$label = $movie["im:name"]["label"];
-			$position = $key + 1;
-			echo "<li>" . $position . " " . $label . "</li>";
-		}
+	foreach ($top as $key => $movie) {
+		$label = $movie["im:name"]["label"];
+		$position = $key + 1;
+		echo "<li>" . $position . " " . $label . "</li>";
+	}
 	?>
 </ul>
