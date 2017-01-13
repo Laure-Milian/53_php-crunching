@@ -79,7 +79,26 @@ $top = $brut["feed"]["entry"];
 		}
 	}
 
+	// Combien cela coûterait-il d'acheter le top10 sur iTunes ? de le louer ?
+	foreach ($top as $key => $movie) {
+		$currency = $movie["im:price"]["attributes"]["currency"];
+		if ($currency === "USD") {
+			$price_buy = $movie["im:price"]["attributes"]["amount"];
+			$total_buy = $total_buy + $price_buy;
+		}
+	}
+	echo "<div> Prix pour acheter le top 100 : " . $total_buy . "</div>";
 
+
+	// Combien cela coûterait-il d'acheter le top10 sur iTunes ? de le louer ?
+	foreach ($top as $key => $movie) {
+		$currency = $movie["im:rentalPrice"]["attributes"]["currency"];
+		if ($currency === "USD") {
+			$price_rent = $movie["im:rentalPrice"]["attributes"]["amount"];
+			$total_rent = $total_rent + $price_rent;
+		}
+	}
+	echo "<div> Prix pour louer le top 100 : " . $total_rent . "</div>";
 ?>
 
 
