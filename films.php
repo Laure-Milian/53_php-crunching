@@ -22,6 +22,20 @@ $top = $brut["feed"]["entry"];
 ?>
 
 
+<?php
+	//Combien de films sont sortis avant 2000 ?
+	foreach ($top as $key => $movie) {
+		$label = $movie["title"]["label"];
+		$labels = explode(" - ", $label);
+		$date = $movie["im:releaseDate"]["label"];
+		$year = substr($date, 0, 4);
+		if ($year < 2000) {
+			$movies_bef2000++;
+		}
+	}
+	echo "<div> Nombre de films sortis avant 2000 : " . $movies_bef2000 . "</div>";
+?>
+
 
 
 <ul>
