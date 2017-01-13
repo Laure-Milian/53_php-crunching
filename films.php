@@ -19,14 +19,9 @@ $top = $brut["feed"]["entry"];
 			echo "<div> Résalisateurs de The LEGO Movie : " . $labels[1] . "</div>";
 		};
 	}
-?>
 
-
-<?php
 	//Combien de films sont sortis avant 2000 ?
 	foreach ($top as $key => $movie) {
-		$label = $movie["title"]["label"];
-		$labels = explode(" - ", $label);
 		$date = $movie["im:releaseDate"]["label"];
 		$year = substr($date, 0, 4);
 		if ($year < 2000) {
@@ -34,7 +29,33 @@ $top = $brut["feed"]["entry"];
 		}
 	}
 	echo "<div> Nombre de films sortis avant 2000 : " . $movies_bef2000 . "</div>";
+
+
+	//Quel est le film le plus récent ? Le plus vieux ?
+	foreach ($top as $key => $movie) {
+		$label = $movie["title"]["label"];
+		$labels = explode(" - ", $label);
+		$title = $labels[0];
+		$date = $movie["im:releaseDate"]["label"];
+		$dates_arr[$date] = $title;
+	}
+
+	ksort($dates_arr);
+	var_dump($dates_arr);
+	$oldest_movie = reset($dates_arr);
+	$newest_movie = end($dates_arr);
+	echo "<div> Film le plus vieux : " . $oldest_movie . "</div>";
+	echo "<div> Film le plus récent : " . $newest_movie . "</div>";
 ?>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -44,8 +65,9 @@ $top = $brut["feed"]["entry"];
 	foreach ($top as $key => $movie) {
 		$label = $movie["title"]["label"];
 		$labels = explode(" - ", $label);
+		$title = $labels[0];
 		$position = $key + 1;
-		echo "<li>" . $position . " " . $labels[0] . "</li>";
+		echo "<li>" . $position . " " . $title . "</li>";
 	}
 	?>
 </ul>
