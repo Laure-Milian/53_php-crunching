@@ -49,7 +49,7 @@ $top = $brut["feed"]["entry"];
 
 	// Quelle est la catégorie de films la plus représentée ?
 	$category_arr = [];
-	
+
 	foreach ($top as $key => $movie) {
 		$category = $movie["category"]["attributes"]["term"];
 		array_push($category_arr, $category);
@@ -61,7 +61,25 @@ $top = $brut["feed"]["entry"];
 		if ($value === max($count_catego)) {
 			echo "<div> Catégorie la plus représentée : " . $key . "</div>";
 		}
-	}	
+	}
+
+	// Quel est le réalisateur le plus présent dans le top100 ?
+	foreach ($top as $key => $movie) {
+		$label = $movie["title"]["label"];
+		$labels = explode(" - ", $label);
+		$director = $labels[1];
+		$directors_arr[] = $director;
+	}
+
+	$directors_count = array_count_values($directors_arr);
+	$len = count($directors_count);
+	foreach ($directors_count as $key => $value) {
+		if ($value === max($directors_count)) {
+			echo "<div> Réalisateur le plus cité : " . $key . "</div>";
+		}
+	}
+
+
 ?>
 
 
